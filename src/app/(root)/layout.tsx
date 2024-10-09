@@ -1,7 +1,5 @@
 import MobileNav from "@/components/shared/MobileNav";
 import Sidebar from "@/components/shared/Sidebar";
-import { ClerkProvider } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
 import React from "react";
 
 function layout({ children }: { children: React.ReactNode }) {

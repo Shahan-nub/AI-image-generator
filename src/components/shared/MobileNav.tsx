@@ -14,6 +14,7 @@ import { navLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 
 export default function MobileNav() {
+  const pathname = usePathname();
   return (
     <header className="header">
       <Link href="/" className="flex items-center gap-2 md:py-2">
@@ -45,7 +46,7 @@ export default function MobileNav() {
 
               <ul className="header-nav_elements">
               {navLinks.map((link) => {
-                const isActive = link.route === usePathname();
+                const isActive = link.route === pathname;
                 return (
                   <li
                     key={link.route}

@@ -8,6 +8,7 @@ import React from "react";
 import { Button } from "../ui/button";
 
 export default function Sidebar() {
+  const pathname= usePathname();
   return (
     <aside className="sidebar">
       <div className="flex size-full flex-col gap-4">
@@ -24,7 +25,7 @@ export default function Sidebar() {
           <SignedIn>
             <ul className="sidebar-nav_elements">
               {navLinks.map((link) => {
-                const isActive = link.route === usePathname();
+                const isActive = link.route === pathname;
                 return (
                   <li
                     key={link.route}
