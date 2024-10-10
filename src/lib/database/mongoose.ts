@@ -3,14 +3,14 @@ import mongoose, { Mongoose }  from 'mongoose';
 const MONGODB_URL : string = process.env.MONGODB_URL! ;
 
 interface MongooseConnection {
-    conn: Mongoose |null;
+    conn: Mongoose | null;
     promise : Promise<Mongoose> | null;
 }
 
-let cached: MongooseConnection = (global as any).mongoose;
+let cached: MongooseConnection = global.mongoose;
 
 if(!cached){
-    cached = (global as any).mongoose = {
+    cached = global.mongoose = {
         conn:null,
         promise:null
     }
