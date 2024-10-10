@@ -2,7 +2,7 @@
 export default function Home() {
   return (
     <section>
-      <p>Home boss</p>
+      <p>Home</p>
     </section>
   );
 }
