@@ -1,4 +1,4 @@
-import mongoose , {Mongoose} from 'mongoose';
+import mongoose  from 'mongoose';
 
 const MONGODB_URL : string = process.env.MONGODB_URL! ;
 
