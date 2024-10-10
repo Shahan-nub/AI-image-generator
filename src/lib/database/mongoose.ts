@@ -1,13 +1,13 @@
 import mongoose , {Mongoose} from 'mongoose';
 
-const MONGODB_URL : string | any = process.env.MONGODB_URL ;
+const MONGODB_URL :  any = process.env.MONGODB_URL ;
 
 interface MongooseConnection {
     conn: Mongoose |null;
     promise : Promise<Mongoose> | null;
 }
 
-let catched: MongooseConnection = (global as any).mongoose
+// let catched: MongooseConnection = (global as any).mongoose
 
 export async function connectDB() {
     try {
