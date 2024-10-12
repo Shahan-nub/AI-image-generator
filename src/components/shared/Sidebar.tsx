@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { Button } from "../ui/button";
+// import { ModeToggle } from "./ThemeToggle";
 
 export default function Sidebar() {
   const pathname= usePathname();
@@ -32,7 +33,7 @@ export default function Sidebar() {
                     className={`sidebar-nav_element group ${
                       isActive
                         ? "bg-purple-gradient text-white"
-                        : "text-gray-700"
+                        : "text-slate-700"
                     }`}
                   >
                     <Link href={link.route} className="sidebar-link">
@@ -53,9 +54,10 @@ export default function Sidebar() {
               </li>
             </ul>
           </SignedIn>
+            {/* <ModeToggle></ModeToggle> */}
 
           <SignedOut>
-            <Button asChild className="button bg-purple-gradient bg-cover">
+            <Button asChild className="button bg-purple-gradient">
                 <Link href="/sign-in">Login</Link>
             </Button>
           </SignedOut>
