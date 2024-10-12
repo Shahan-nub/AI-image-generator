@@ -1,5 +1,6 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-prototype-builtins */
+import { aspectRatioOptions } from "@/constants";
 import { type ClassValue, clsx } from "clsx";
 // import qs from "qs";
 
@@ -95,7 +96,7 @@ export const dataUrl = `data:image/svg+xml;base64,${toBase64(
 // };
 
 // GE IMAGE SIZE
-// export type AspectRatioKey = keyof typeof aspectRatioOptions;
+export type AspectRatioKey = keyof typeof aspectRatioOptions;
 // export const getImageSize = (
 //   type: string,
 //   image: any,

@@ -10,6 +10,7 @@ function layout({ children }: { children: React.ReactNode }) {
         <Sidebar></Sidebar>
         {/* mobile nav  */}
         <MobileNav></MobileNav>
+        
         <div className="root-container">
           <div className="wrapper">
             {children}
