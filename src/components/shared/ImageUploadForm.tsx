@@ -59,7 +59,9 @@ const ImageUploadForm = () => {
       setUploadedImage(data);
       console.log(data)
       setIsUploading(false);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const handleDownload = () => {
@@ -144,6 +146,7 @@ const ImageUploadForm = () => {
                   onError={() => {
                     debounce(() => {
                       setIsTransforming(false);
+                      console.log(isTransforming);
                     },8000)
                   }}
                 />

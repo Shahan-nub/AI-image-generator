@@ -9,10 +9,10 @@ import { usePathname } from "next/navigation";
 
 const ImageUploadForm = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
+  // const [isUploading, setIsUploading] = useState(false);
   const [isTransforming, setIsTransforming] = useState(false);
-  const [rawFile, setRawFile] = useState<any | null>(null);
-  const [transformedImage, setTransformedImage] = useState<any | null>(null);
+  const [rawFile, setRawFile] = useState<File | null>(null);
+  const [transformedImage, setTransformedImage] = useState<string | null>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
   //FILE UPLOAD
@@ -22,7 +22,7 @@ const ImageUploadForm = () => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    setIsUploading(true);
+    // setIsUploading(true);
 
     const formData = new FormData();
     formData.append("file", file, file.name);
@@ -36,7 +36,7 @@ const ImageUploadForm = () => {
       reader.readAsDataURL(file);
     }
 
-    setIsUploading(false);
+    // setIsUploading(false);
   };
   // FILE DOWNLOAD
   const handleDownload = () => {
@@ -158,7 +158,9 @@ const ImageUploadForm = () => {
         </div>
         <Button
           onClick={() => {
-            uploadedImage && handleTransformImage();
+            if(uploadedImage) {
+             handleTransformImage();
+            }
           }}
           type="button"
           className={`${

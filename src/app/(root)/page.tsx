@@ -38,7 +38,7 @@ export default function Home() {
       </h1>
       <div className="flex flex-wrap gap-6 lg:gap-8 w-full justify-center items-center">
         {SERVICES.map(({ title, description, btn }) => (
-          <Card title={title} description={description} btn={btn}></Card>
+          <Card key={title} title={title} description={description} btn={btn}></Card>
         ))}
       </div>
 

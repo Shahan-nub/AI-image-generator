@@ -4,11 +4,10 @@ interface CardParams {
     title:string,
     description?:string,
     btn?:string,
-    link?:string,
 }
 
 
-const Card = ({title,description,btn,link}:CardParams) => {
+const Card = ({title,description,btn}:CardParams) => {
   return (
     <div className="cookieCard">
       <p className="cookieHeading">{title}</p>

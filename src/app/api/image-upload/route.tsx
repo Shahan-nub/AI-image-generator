@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 interface CloudinaryUploadResult {
   public_id: string;
-  [key: string]: any
+  [key: string]: string
 }
 
 cloudinary.config({
