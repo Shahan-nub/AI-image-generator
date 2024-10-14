@@ -91,7 +91,7 @@ export const debounce = (func: (...args: string[]) => void, delay: number) => {
   let timeoutId: NodeJS.Timeout | null;
   return (...args: string[]) => {
     if (timeoutId) clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func.apply(null, args), delay);
+    timeoutId = setTimeout(() => func(...args), delay);
   };
 };
 
