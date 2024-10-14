@@ -5,6 +5,9 @@ import React, { useRef, useState } from "react";
 import axios from "axios";
 import { Button } from "../ui/button";
 import { CldImage } from "next-cloudinary";
+import { usePathname } from "next/navigation";
+import { navLinks } from "@/constants";
+import { debounce } from "@/lib/utils";
 
 const socialFormats = {
   "Instagram Square (1:1)": { width: 1080, height: 1080, aspectRatio: "1:1" },
@@ -54,7 +57,7 @@ const ImageUploadForm = () => {
       //   const data = await response.json();
       const data = response.data.publicId;
       setUploadedImage(data);
-
+      console.log(data)
       setIsUploading(false);
     } catch (error) {}
   };
@@ -78,9 +81,14 @@ const ImageUploadForm = () => {
         // document.body.removeChild(link);
       });
   };
+  const pathname = usePathname();
+  const obj = navLinks.find((obj) => obj.route === pathname);
 
   return (
     <section className="w-full">
+      <h1 className="font-bold text-2xl lg:4xl mb-6 lg:mb-8 text-purple-400 capitalize">
+        {obj?.label}
+      </h1>
       <form className="flex flex-col gap-3 lg:gap-6 w-full">
         <div className="flex flex-col gap-2 ">
           <Label>Upload an image</Label>
@@ -121,8 +129,9 @@ const ImageUploadForm = () => {
             {/* {imageSrc && <Image className=" object-cover rounded-xl border border-black p-4" src={imageSrc} width={400} height={400} alt="img"></Image>} */}
 
             {imageSrc && (
-              <div className="rounded-xl border border-black p-4">
+              <div className="rounded-xl shadow-2xl my-4">
                 <CldImage
+                  className="rounded-lg w-full"
                   width={socialFormats[selectedFormat].width}
                   height={socialFormats[selectedFormat].height}
                   src={uploadedImage}
@@ -132,6 +141,11 @@ const ImageUploadForm = () => {
                   aspectRatio={socialFormats[selectedFormat].aspectRatio}
                   gravity="auto"
                   ref={imageRef}
+                  onError={() => {
+                    debounce(() => {
+                      setIsTransforming(false);
+                    },8000)
+                  }}
                 />
               </div>
             )}
