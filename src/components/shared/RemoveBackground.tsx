@@ -68,7 +68,7 @@ const ImageUploadForm = () => {
         setIsTransforming(true);
         const response = await fetch("https://api.remove.bg/v1.0/removebg", {
           method: "POST",
-          headers: { "X-Api-Key": process.env.REMOVE_BG_API_KEY! },
+          headers: { "X-Api-Key": "nUnWBU4Nj1ZRiMhE24Ez9spK" },
           body: formData,
         });
 
