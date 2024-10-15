@@ -141,7 +141,7 @@ const FillBackground = () => {
                 ></Image>
               </>
             )}
-            {isTransforming && <div>
+            {(isTransforming || isUploading) && <div>
                 <h1 className="text-4xl max-lg:text-2xl font-bold text-gray-600 animate-pulse">Transforming image...</h1>
                 </div>}
             {uploadedImage && (
