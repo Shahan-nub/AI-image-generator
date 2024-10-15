@@ -72,8 +72,8 @@ const ImageUploadForm = () => {
           body: formData,
         });
 
-        const blob = await response.blob(); // Receive the processed image
-        const imageUrl = URL.createObjectURL(blob); // Create URL for the processed image
+        const blob = await response.blob(); 
+        const imageUrl = URL.createObjectURL(blob); 
         setTransformedImage(imageUrl);
 
         setIsTransforming(false);
