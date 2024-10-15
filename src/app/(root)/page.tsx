@@ -18,8 +18,8 @@ const SERVICES = [
   {
     title: "BACKGROUND FILL",
     description:
-      "Fills the background of the image provided with the desired color evenly without leaving outlines.",
-    btn: "In production",
+      "Fills the background of the image to match the original background and the selected format without cropping it.",
+    btn: "Available",
   },
   {
     title: "OBJECT FILL",

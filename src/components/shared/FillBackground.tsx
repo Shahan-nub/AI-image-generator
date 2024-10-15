@@ -7,6 +7,7 @@ import { CldImage } from "next-cloudinary";
 import { usePathname } from "next/navigation";
 import { navLinks } from "@/constants";
 import { debounce } from "@/lib/utils";
+import Image from "next/image";
 
 const socialFormats = {
   "Instagram Square (1:1)": { width: 1080, height: 1080, aspectRatio: "1:1" },
@@ -18,7 +19,7 @@ const socialFormats = {
 
 type SocialFormat = keyof typeof socialFormats;
 
-const ImageUploadForm = () => {
+const FillBackground = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [selectedFormat, setSelectedFormat] = useState<SocialFormat>(
     "Instagram Square (1:1)"
@@ -48,6 +49,7 @@ const ImageUploadForm = () => {
     }
 
     try {
+        setIsTransforming(true);
       const response = await axios.post("/api/image-upload", formData);
       console.log(response);
 
@@ -56,10 +58,11 @@ const ImageUploadForm = () => {
       //   const data = await response.json();
       const data = response.data.publicId;
       setUploadedImage(data);
-      console.log(data)
+      console.log(data);
+      setIsTransforming(false);
       setIsUploading(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -119,20 +122,33 @@ const ImageUploadForm = () => {
           </select>
         </div>
 
-        {isUploading && (
+        {/* {isUploading && (
           <div className="LOADER flex gap-2 items-center justify-center font-semibold text-lg text-center text-gray-600 animate-pulse">
             <p>Loading Preview...</p>
           </div>
-        )}
-        {uploadedImage && (
-          <div className="flex flex-col gap-3">
-            <Label>Image Preview </Label>
-            {/* {imageSrc && <Image className=" object-cover rounded-xl border border-black p-4" src={imageSrc} width={400} height={400} alt="img"></Image>} */}
-
+        )} */}
+        <div className="flex flex-col gap-3">
+          <div className="rounded-xl my-2 flex flex-col gap-5  justify-center w-full">
             {imageSrc && (
-              <div className="rounded-xl shadow-2xl my-4">
+              <>
+                <Label>Uploaded Image </Label>
+                <Image
+                  className="shadow-2xl rounded-xl"
+                  src={imageSrc}
+                  width={500}
+                  height={500}
+                  alt="uploaded img"
+                ></Image>
+              </>
+            )}
+            {isTransforming && <div>
+                <h1 className="text-4xl max-lg:text-2xl font-bold text-gray-600 animate-pulse">Transforming image...</h1>
+                </div>}
+            {uploadedImage && (
+              <div className="flex flex-col gap-5">
+                <Label>Transformed Image </Label>
                 <CldImage
-                  className="rounded-lg w-full"
+                  className="rounded-lg w-full lg:w-9/12 shadow-2xl"
                   width={socialFormats[selectedFormat].width}
                   height={socialFormats[selectedFormat].height}
                   src={uploadedImage}
@@ -140,33 +156,30 @@ const ImageUploadForm = () => {
                   alt="Modified image"
                   crop="fill"
                   aspectRatio={socialFormats[selectedFormat].aspectRatio}
+                  fillBackground
                   gravity="auto"
                   ref={imageRef}
                   onError={() => {
                     debounce(() => {
                       setIsTransforming(false);
                       console.log(isTransforming);
-                    },8000)
+                    }, 8000);
                   }}
                 />
               </div>
             )}
           </div>
-        )}
-
-        {/* {imageSrc && (
-          <canvas
-            ref={canvasRef}
-            className="hidde"
-            style={{ border: "1px solid black" }}
-          ></canvas>
-        )} */}
-        <Button onClick={handleDownload} type="button" className="bg-purple-600 hover:bg-[#1c0080]">
-          Download the resized image.
+        </div>
+        <Button
+          onClick={handleDownload}
+          type="button"
+          className="bg-purple-600 hover:bg-[#1c0080]"
+        >
+          Download new image.
         </Button>
       </form>
     </section>
   );
 };
 
-export default ImageUploadForm;
+export default FillBackground;
